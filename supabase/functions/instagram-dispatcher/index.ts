@@ -18,7 +18,7 @@ import { commitDispatchedMessage } from "../_shared/dispatch.ts";
 import { Json } from "../_shared/db_types.ts";
 
 const API_VERSION = "v25.0";
-const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const DISPATCHER_AUTH_TOKEN = Deno.env.get("DISPATCHER_AUTH_TOKEN")!;
 
 class InstagramError extends Error {
   constructor(
@@ -210,7 +210,7 @@ Deno.serve(async (req) => {
   const authHeader = req.headers.get("Authorization");
   const token = authHeader?.replace("Bearer ", "");
 
-  if (token !== SERVICE_ROLE_KEY) {
+  if (token !== DISPATCHER_AUTH_TOKEN) {
     return new Response("Unauthorized", { status: 401 });
   }
 

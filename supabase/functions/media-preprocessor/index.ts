@@ -112,13 +112,13 @@ function calculateCost(
 const MAX_SMALL_DOCUMENT_SIZE = 2 * 1000; // 2 KB
 const INLINE_DATA_SIZE_LIMIT = 19 * 1000 * 1000; // 19MB
 
-const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const DISPATCHER_AUTH_TOKEN = Deno.env.get("DISPATCHER_AUTH_TOKEN")!;
 
 Deno.serve(async (req) => {
   const authHeader = req.headers.get("Authorization");
   const token = authHeader?.replace("Bearer ", "");
 
-  if (token !== SERVICE_ROLE_KEY) {
+  if (token !== DISPATCHER_AUTH_TOKEN) {
     return new Response("Unauthorized", { status: 401 });
   }
 

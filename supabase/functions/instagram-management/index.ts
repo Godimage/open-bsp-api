@@ -21,13 +21,13 @@ import {
 } from "./login.ts";
 import { type User } from "@supabase/supabase-js";
 
-const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const DISPATCHER_AUTH_TOKEN = Deno.env.get("DISPATCHER_AUTH_TOKEN")!;
 
 // Routes that do not use the user/API-key auth middleware. Each has its own
-// auth: an onboarding token, the service-role key, or a signed_request HMAC.
-// `authorize-url` only composes the public OAuth URL (client_id + scopes + the
-// caller-supplied redirect_uri/state), so it is safe to leave open — the public
-// onboarding-link page needs it without a session.
+// auth: an onboarding token, the dispatcher auth token, or a signed_request
+// HMAC. `authorize-url` only composes the public OAuth URL (client_id +
+// scopes + the caller-supplied redirect_uri/state), so it is safe to leave
+// open — the public onboarding-link page needs it without a session.
 const PUBLIC_SUFFIXES = [
   "/authorize-url",
   "/onboard",
@@ -357,7 +357,7 @@ app.post("/instagram-management/onboard", async (c) => {
 app.post("/instagram-management/refresh-tokens", async (c) => {
   const token = c.req.header("Authorization")?.replace("Bearer ", "");
 
-  if (token !== SERVICE_ROLE_KEY) {
+  if (token !== DISPATCHER_AUTH_TOKEN) {
     throw new HTTPException(401, { message: "Unauthorized" });
   }
 
