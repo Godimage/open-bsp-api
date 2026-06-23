@@ -20,7 +20,7 @@ import * as log from "../_shared/logger.ts";
  * resumes where this one stopped.
  */
 
-const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+const DISPATCHER_AUTH_TOKEN = Deno.env.get("DISPATCHER_AUTH_TOKEN");
 
 const BUCKET = "media";
 const LIST_LIMIT = 1000; // max page size for Storage list()
@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
   const authHeader = req.headers.get("Authorization");
   const token = authHeader?.replace("Bearer ", "");
 
-  if (token !== SERVICE_ROLE_KEY) {
+  if (token !== DISPATCHER_AUTH_TOKEN) {
     return new Response("Unauthorized", { status: 401 });
   }
 
