@@ -248,13 +248,14 @@ Option A: deploy via Supabase GitHub Integration
 
 ##### Edge Function secrets
 
-> Create the secret at Supabase Dashboard > Project Settings > Edge Functions
-> \> Secrets, or via `supabase secrets set DISPATCHER_AUTH_TOKEN=<value>`
+> Create the secret at Supabase Dashboard > Project Settings > Edge Functions \>
+> Secrets, or via `supabase secrets set DISPATCHER_AUTH_TOKEN=<value>`
 
-- **DISPATCHER_AUTH_TOKEN**: any strong random value (e.g. `openssl rand -hex
-  32`). Must match the `edge_functions_token` vault secret above — this is
-  the shared secret the dispatcher/management functions use to authenticate
-  calls coming from the DB trigger.
+- **DISPATCHER_AUTH_TOKEN**: any strong random value (e.g.
+  `openssl rand -hex
+  32`). Must match the `edge_functions_token` vault secret
+  above — this is the shared secret the dispatcher/management functions use to
+  authenticate calls coming from the DB trigger.
 
 ##### Release
 
@@ -293,10 +294,12 @@ self-contained in GitHub Actions instead of relying on Supabase's integration.
   [personal access token](https://supabase.com/dashboard/account/tokens)
 - **SUPABASE_DB_PASSWORD**
   <!-- Get it at Supabase > Project > Database > Settings > Database password `https://supabase.com/dashboard/project/{project_id}/database/settings` -->
-- **DISPATCHER_AUTH_TOKEN**: any strong random value (e.g. `openssl rand -hex
-  32`). Shared secret the dispatcher/management functions use to authenticate
-  calls from the DB trigger; must match the `edge_functions_token` vault
-  secret above and the `DISPATCHER_AUTH_TOKEN` Edge Function secret.
+- **DISPATCHER_AUTH_TOKEN**: any strong random value (e.g.
+  `openssl rand -hex
+  32`). Shared secret the dispatcher/management functions
+  use to authenticate calls from the DB trigger; must match the
+  `edge_functions_token` vault secret above and the `DISPATCHER_AUTH_TOKEN` Edge
+  Function secret.
 
 ##### Variables
 
